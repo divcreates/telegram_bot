@@ -234,9 +234,41 @@ async def notes_mode(message: types.Message):
 async def chat_handler(message: types.Message):
 
     user_id = message.from_user.id
-    user_input = message.text
+    user_input = message.text 
+    
+    
+    
 
     if not user_input:
+        return
+        # Greeting Auto Reply
+
+    greetings = ["hi", "hello", "hey", "hii", "yo"]
+
+    if user_input.lower() in greetings:
+
+        current_mode = user_modes.get(user_id, "study").upper()
+
+        mode_emojis = {
+            "STUDY": "📚",
+            "CODE": "💻",
+            "QUIZ": "❓",
+            "NOTES": "📝"
+        }
+
+        emoji = mode_emojis.get(current_mode, "🤖")
+
+        await message.reply(
+            f"👋 Welcome to Smart AI Tutor!\n\n"
+            f"🎯 Current Mode: {emoji} {current_mode}\n\n"
+            f"Available Modes:\n"
+            f"📚 /study → Study concepts\n"
+            f"💻 /code → Coding help\n"
+            f"❓ /quiz → Interactive quizzes\n"
+            f"📝 /notes → Smart notes\n\n"
+            f"Use /help to see all commands."
+        )
+
         return
 
     # Initialize user if not exists
@@ -260,7 +292,6 @@ async def chat_handler(message: types.Message):
             system_prompt,
             *recent_messages
         ]
-
     try:
 
         # Typing indicator
@@ -284,8 +315,21 @@ async def chat_handler(message: types.Message):
         })
 
         # Send response
+        current_mode = user_modes[user_id].upper()
+
+        mode_emojis = {
+            "STUDY": "📚",
+            "CODE": "💻",
+            "QUIZ": "❓",
+            "NOTES": "📝"
+        }
+
+        emoji = mode_emojis.get(current_mode, "🤖")
+
+        header = f"{emoji} {current_mode} MODE"
+
         await message.reply(
-            bot_reply,
+            f"{header}\n\n{bot_reply}",
             parse_mode="Markdown"
         )
 
@@ -300,7 +344,6 @@ async def chat_handler(message: types.Message):
         await message.reply(
             "⚠️ Error communicating with OpenAI."
         )
-
 # =========================
 # Main Function
 # =========================
