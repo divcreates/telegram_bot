@@ -48,7 +48,7 @@ Each user has a dedicated list of messages (chat history), for smooth back-and-f
 
 ---
 
-## 🔐 .env Setup
+## 🔐 .env Setup (.env file is there just change the API keys)
 
 Create a `.env` file in the root directory and add your keys:
 
