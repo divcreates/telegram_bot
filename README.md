@@ -1,88 +1,113 @@
-# 🤖 Async Telegram ChatGPT Bot (Aiogram + OpenAI)
+# 🤖 AI Study Assistant Bot (Aiogram + OpenAI)
 
-This is an async Telegram bot built using `aiogram` and OpenAI's GPT-4o-mini. It supports command-based interaction, chat memory (per user), and runs locally using Python’s asyncio framework.
+An asynchronous AI-powered Telegram bot built using `aiogram` and OpenAI's `gpt-4o-mini`.
 
----
-
-## 🚀 Features
-
-- `/start`, `/help`, `/clear` commands
-- Context-aware conversations using OpenAI Chat API
-- Separate memory per user
-- Asynchronous & scalable structure
-- `.env` file for secure secret management
+The bot supports multiple AI modes including study assistance, coding help, quizzes, and notes generation with context-aware conversations using Python's `asyncio` framework.
 
 ---
 
-## 🛠️ Tech Stack
+# 🚀 Features
+
+- ⚡ Asynchronous architecture using `asyncio`
+- 🤖 OpenAI GPT-4o-mini integration
+- 🧠 Context-aware chat memory
+- 🎯 Multiple AI modes:
+  - `/study`
+  - `/code`
+  - `/quiz`
+  - `/notes`
+- 🧹 Clear chat history support
+- 💬 Telegram typing indicator
+- 📝 Logging system
+- 🔐 Secure API key management using `.env`
+
+---
+
+# 🛠️ Tech Stack
 
 - Python 3.9+
-- [Aiogram](https://docs.aiogram.dev/) (Telegram Bot API)
-- OpenAI Python SDK (`gpt-4o-mini`)
-- `python-dotenv` for environment variables
+- [Aiogram](https://docs.aiogram.dev/)
+- OpenAI Python SDK
+- Asyncio
+- python-dotenv
 
 ---
 
-## 🧠 Memory (Context Handling)
+# 🧠 Memory (Context Handling)
 
-Each user has a dedicated list of messages (chat history), for smooth back-and-forth conversation with GPT.
+Each user has a dedicated conversation history for maintaining context-aware AI responses.
 
 ```json
 [
-  {"role": "user", "content": "Hi"},
-  {"role": "assistant", "content": "Hello, how can I help you?"}
+  {"role": "user", "content": "Explain semantic analysis"},
+  {"role": "assistant", "content": "Semantic analysis checks meaning and correctness..."}
 ]
 ```
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
-```
+```bash
 .
 ├── bot.py
 ├── .env
 ├── requirements.txt
-└── README.md
+├── README.md
+└── bot.log
 ```
 
 ---
 
-## 🔐 .env Setup (.env file is there just change the API keys)
+# 🔐 Environment Variables
 
-Create a `.env` file in the root directory and add your keys:
+Create a `.env` file in the root directory:
 
 ```env
-TELEGRAM_BOT_TOKEN=your_telegram_bot_token_here
-OPENAI_API_KEY=your_openai_api_key_here
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+OPENAI_API_KEY=your_openai_api_key
 ```
 
 ---
 
-## 📦 Installation
+# 📦 Installation
 
-### 1. Clone This Repo
+## 1. Clone Repository
 
 ```bash
-git clone https://github.com/Divyxshuu/Telegram_Bot.git
-cd Telegram_Bot
+git clone https://github.com/divcreates/telegram_bot.git
+cd telegram_bot
 ```
 
-### 2. Create a Virtual Environment (optional but recommended)
+---
+
+## 2. Create Virtual Environment
+
+### Windows
 
 ```bash
 python -m venv venv
-source venv/bin/activate        # macOS/Linux
-venv\Scriptsactivate           # Windows
+venv\Scripts\activate
 ```
 
-### 3. Install Dependencies
+### Linux / macOS
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+---
+
+## 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run the Bot
+---
+
+## 4. Run the Bot
 
 ```bash
 python bot.py
@@ -90,59 +115,111 @@ python bot.py
 
 ---
 
-## ✅ Supported Commands
+# 🎯 Available Commands
 
-| Command    | Description                        |
-|------------|------------------------------------|
-| `/start`   | Start the conversation             |
-| `/help`    | Show available commands            |
-| `/clear`   | Clear chat memory (per user)       |
-
----
-
-## 📸 Demo Working
-
-> _https://www.linkedin.com/posts/notdiv_ai-telegrambot-python-activity-7349729683464241153-TlM9?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFTrBLUBThlhzErqYuRJ8udcvHDRDZ2TBBU_
+| Command | Description |
+|---|---|
+| `/start` | Start the bot |
+| `/help` | Show help menu |
+| `/clear` | Clear chat memory |
+| `/study` | Study assistant mode |
+| `/code` | Coding assistant mode |
+| `/quiz` | Interactive quiz mode |
+| `/notes` | Smart notes generator |
 
 ---
 
-## 🧠 Sample Conversation
+# 🧠 AI Modes
 
+## 📚 Study Mode
+Explains educational concepts clearly and simply.
+
+## 💻 Code Mode
+Helps with coding, debugging, and programming questions.
+
+## ❓ Quiz Mode
+Generates interactive quiz questions for practice and revision.
+
+## 📝 Notes Mode
+Creates concise and structured notes for study topics.
+
+---
+
+# ⚙️ Architecture
+
+```text
+Telegram User
+      ↓
+Aiogram Bot
+      ↓
+Context Manager
+      ↓
+OpenAI GPT-4o-mini
+      ↓
+AI Response
+      ↓
+Telegram User
 ```
-User: /start
-Bot: Hello, I am bot created by Div. How may I help you today?
 
-User: What's the capital of Japan?
-Bot: The capital of Japan is Tokyo.
+---
+
+# 📸 Demo
+
+### Quiz Mode Example
+
+```text
+User: /quiz
+
+Bot: Switched to QUIZ mode.
+
+User: Compiler Design - Semantic Analysis
+
+Bot: Question 1:
+What is the primary purpose of semantic analysis in a compiler?
 ```
 
 ---
 
-## 🧩 Future Improvements
+# 🧩 Future Improvements
 
-- Add Whisper (voice input)
-- Deploy to Render/Railway
-- Add inline buttons with AI presets
-- Rate limiting or usage limits
-- Persist context with Redis or SQLite
-
----
-
-## 📄 License
-
-This project is open-sourced under the MIT License.
+- SQLite persistent memory
+- Voice message support using Whisper
+- Image understanding support
+- PDF notes export
+- Inline keyboard buttons
+- WhatsApp integration
+- Cloud deployment
+- Streaming AI responses
 
 ---
 
-## 👤 Author
+# ☁️ Deployment
 
-Built by Div ❤️ 
-🔗 [LinkedIn](https://www.linkedin.com/in/notdiv/)  
-🌐 [GitHub](https://github.com/Divyxshuu)
+The bot can be deployed on:
+
+- Railway
+- Render
+- Docker
+- VPS
 
 ---
 
-## 📎 requirements.txt
+# 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+# 👨‍💻 Author
+
+Built by Div ❤️
+
+🔗 GitHub: https://github.com/divcreates  
+🔗 LinkedIn: https://www.linkedin.com/in/notdiv/
+
+---
+
+# 📎 requirements.txt
 
 ```txt
 aiogram
